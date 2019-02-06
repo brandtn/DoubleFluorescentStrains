@@ -1,8 +1,8 @@
 #######################
-#gating.R       
+#gating_Double_Fluorescent_Strains.R       
 #
 #started: 01/07/2016
-#modified: 1/15/2019
+#modified: 2/6/2019
 #
 #author1: G Avecilla, S Lauer, D Gresham
 #author2: N Brandt

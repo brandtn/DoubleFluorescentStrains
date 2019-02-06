@@ -1,5 +1,5 @@
 ---
-title: "Gresham Lab Floww Cytometry Single Timepoint Analysis"
+title: "Gresham Lab Floww Cytometry Double Fluorescent Strain Analysis"
 author: 'G. Avecilla, N. Brandt, S. Lauer, F. Abdul-Rahman, D. Gresham'
 date: '`r Sys.Date()`'
 output: html_notebook
@@ -11,11 +11,11 @@ To analyze flow cytometry data, you MUST use the latest version of this code, av
 
 **Experimental overview**
 
-Write a detailed description of your experiment here including the goal of the analysis and your interpretation of the results.   
-If you still see this text it means that you have not described the experiment and whatever follows is meaningless.
+Comparing the signal between double fluorescent strains created from crossing a prACT1::ymCitrine:kanMX near GAP1 strain with either a prACT1::ymCherry:kanMX near MEP2 or prACT1::ymCherry:kanMX between HXT6 and HXT on the Accuri and FACSAria.
 
-*This code is designed for use with the Accuri flow cytometer, which is equiped with the following lasers and filters*
+*This experient uses the  Accuri flow cytometer and the FACSAria, which is equiped with the following lasers and filters*
 
+Accuri
 * Blue laser (488 nm)
 * FL1 filter = 514/20nm   GFP
 * FL3 filter = 575/25nm   YFP
@@ -23,7 +23,29 @@ If you still see this text it means that you have not described the experiment a
 * Yellow/green laser (552 nm)
 * FL2 filter = 610/20nm   mCherry, dtomato
 * FL4 filter = 586/15nm   DsRed
-  
+
+FACSAria
+* Red laser (633 nm)
+* Detector A = 780/60nm   APC-Cy7
+* Detector B = 730/45nm   Alexa-700
+* Detector C = 660/20nm   APC
+
+* Blue laser (488 nm)
+* Detector A = 780/60nm   PE-Cy7
+* Detector B = 710/50nm   PerCP-Cy5-5
+* Detector C = 610/20nm   PE-Texas Red
+* Detector D = 575/25nm   PE, PI, YFP
+* Detector E = 530/30nm   FITC, GFP
+* Detector F = 488/10nm   SSC
+
+* Violet laser (407 nm)
+* Detector A = 525/50nm   AmCyan, BV510
+* Detector B = 450/50nm   Pacific Blue, Hoechst, DAPI, BV421
+
+* Yellow/green laser (561 nm)
+* Detector A = 610/20nm   mCherry
+* Detector B = 586/15nm   DsRed
+
 **Requirements**
 
 In order to run this code you need:
