@@ -220,7 +220,7 @@ flowData <- subset(flowData, pData(flowData)$Strain=="FY4"|pData(flowData)$Strai
 
 #flowData <- subset(flowData, pData(flowData)$Strain=="FY4"|pData(flowData)$Strain=="MEP2_mCherry_4"|pData(flowData)$Strain=="HXT6/7_mCherry_7"|pData(flowData)$Strain=="1658"|pData(flowData)$Strain=="5A"|pData(flowData)$Strain=="5B"|pData(flowData)$Strain=="3A"|pData(flowData)$Strain=="3D")
 
-#flowData <- subset(flowData, pData(flowData)$Experiment!="Aria_Default_Volt")
+flowData <- subset(flowData, pData(flowData)$Experiment!="Aria_Default_Volt")
 
 
 pData(flowData)$Strain<-relevel(pData(flowData)$Strain, "3D")
@@ -396,20 +396,39 @@ f1vf2 <- list()
 f1 <- list()
 f2 <- list()
   
+
+
 for(i in 1:length(flowData)){
-fvs[[i]] <- ggplot(flowData[i])+
-  geom_hex(aes(x = `FSC.A`, y =  `SSC.A`), bins = 128) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
-fvf1[[i]] <- ggplot(flowData[i])+
-  geom_hex(aes(x = `FSC.A`, y =  `FL1.A`), bins = 128) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
-fvf2[[i]] <- ggplot(flowData[i])+
-  geom_hex(aes(x = `FSC.A`, y =  `FL2.A`), bins = 128) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
-f1vf2[[i]] <- ggplot(flowData[i])+
-  geom_hex(aes(x = `FL1.A`, y =  `FL2.A`), bins = 128) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
-f1[[i]] <- ggplot(flowData[i])+
-  geom_density(aes(x = `FL1.A`, y=..count..)) + scale_x_log10() + theme_classic()
-f2[[i]] <- ggplot(flowData[i])+
-  geom_density(aes(x = `FL2.A`, y=..count..)) + scale_x_log10() + theme_classic()
+fvs[[i]] <- ggplot(filter(filtered.data, SAMPLE==sampleNames(flowData)[i]))+
+  geom_hex(aes(x = FSC.A, y =  SSC.A), bins = 128) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
+fvf1[[i]] <- ggplot(filter(filtered.data, SAMPLE==sampleNames(flowData)[i]))+
+  geom_hex(aes(x = FSC.A, y =  FL1.A), bins = 128) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
+fvf2[[i]] <- ggplot(filter(filtered.data, SAMPLE==sampleNames(flowData)[i]))+
+  geom_hex(aes(x = FSC.A, y =  FL2.A), bins = 128) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
+f1vf2[[i]] <- ggplot(filter(filtered.data, SAMPLE==sampleNames(flowData)[i]))+
+  geom_hex(aes(x = FL1.A, y =  FL2.A), bins = 128) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
+f1[[i]] <- ggplot(filter(filtered.data, SAMPLE==sampleNames(flowData)[i]))+
+  geom_density(aes(x = FL1.A, y=..count..)) + scale_x_log10() + theme_classic()
+f2[[i]] <- ggplot(filter(filtered.data, SAMPLE==sampleNames(flowData)[i]))+
+  geom_density(aes(x = FL2.A, y=..count..)) + scale_x_log10() + theme_classic()
 }
+
+
+
+# for(i in 1:length(flowData)){
+# fvs[[i]] <- ggplot(flowData[i])+
+#   geom_hex(aes(x = `FSC.A`, y =  `SSC.A`), bins = 128) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
+# fvf1[[i]] <- ggplot(flowData[i])+
+#   geom_hex(aes(x = `FSC.A`, y =  `FL1.A`), bins = 128) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
+# fvf2[[i]] <- ggplot(flowData[i])+
+#   geom_hex(aes(x = `FSC.A`, y =  `FL2.A`), bins = 128) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
+# f1vf2[[i]] <- ggplot(flowData[i])+
+#   geom_hex(aes(x = `FL1.A`, y =  `FL2.A`), bins = 128) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
+# f1[[i]] <- ggplot(flowData[i])+
+#   geom_density(aes(x = `FL1.A`, y=..count..)) + scale_x_log10() + theme_classic()
+# f2[[i]] <- ggplot(flowData[i])+
+#   geom_density(aes(x = `FL2.A`, y=..count..)) + scale_x_log10() + theme_classic()
+# }
 
 # for(i in 1:length(flowData)){
 # fvs[[i]] <- ggplot(flowData[i])+
