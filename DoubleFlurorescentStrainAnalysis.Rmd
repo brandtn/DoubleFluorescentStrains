@@ -86,6 +86,7 @@ requireInstall <- function(packageName,isBioconductor=F) {
 requireInstall("openCyto",isBioconductor=T)
 requireInstall("ggcyto",isBioconductor=T)
 requireInstall("gridExtra",isBioconductor=T)
+requireInstall("ggforce",isBioconductor=T)
 requireInstall("tidyverse")
 
 ```
@@ -168,7 +169,7 @@ flowData1 <- read.flowSet(files=files, pattern=".fcs", column.pattern="FSC.A|SSC
 #Defines the sample name in the two places needed for the flowframe
 #sampleNames must be unique and is used by flowframe to differenate between flowframes
 #pData()$name is used as a defualt value in many of the functions used to display FCS data
-sampleNames(flowData1) <- paste(gsub(" ","_",sample.sheet1$Strain),"_",sub(" ","_",sample.sheet$Well), sep="")
+sampleNames(flowData1) <- paste(gsub(" ","_",sample.sheet1$Strain),"_",sub(" ","_",sample.sheet1$Well), sep="")
 pData(flowData1)$name <- sampleNames(flowData1)
 
 
@@ -179,7 +180,7 @@ pData(flowData1)$Genotype <- sample.sheet1$Genotype
 pData(flowData1)$Ploidy <- sample.sheet1$Ploidy
 pData(flowData1)$Media <- sample.sheet1$Media
 pData(flowData1)$Experiment <- sample.sheet1$Experiment
-
+pData(flowData1)$Instrument <- sample.sheet1$Instrument
 
 #Aria Data
 
@@ -211,8 +212,34 @@ pData(flowData2)$Genotype <- sample.sheet2$Genotype
 pData(flowData2)$Ploidy <- sample.sheet2$Ploidy
 pData(flowData2)$Media <- sample.sheet2$Media
 pData(flowData2)$Experiment <- sample.sheet2$Experiment
+pData(flowData2)$Instrument <- sample.sheet2$Instrument
 
 flowData <- rbind2(flowData1, flowData2)
+
+flowData <- subset(flowData, pData(flowData)$Strain=="FY4"|pData(flowData)$Strain=="HXT6n7_mCherry_7"|pData(flowData)$Strain=="1658"|pData(flowData)$Strain=="3D")
+
+#flowData <- subset(flowData, pData(flowData)$Strain=="FY4"|pData(flowData)$Strain=="MEP2_mCherry_4"|pData(flowData)$Strain=="HXT6/7_mCherry_7"|pData(flowData)$Strain=="1658"|pData(flowData)$Strain=="5A"|pData(flowData)$Strain=="5B"|pData(flowData)$Strain=="3A"|pData(flowData)$Strain=="3D")
+
+#flowData <- subset(flowData, pData(flowData)$Experiment!="Aria_Default_Volt")
+
+
+pData(flowData)$Strain<-relevel(pData(flowData)$Strain, "3D")
+pData(flowData)$Strain<-relevel(pData(flowData)$Strain, "3A")
+pData(flowData)$Strain<-relevel(pData(flowData)$Strain, "HXT6n7_mCherry_7")
+pData(flowData)$Strain<-relevel(pData(flowData)$Strain, "5B")
+pData(flowData)$Strain<-relevel(pData(flowData)$Strain, "5A")
+pData(flowData)$Strain<-relevel(pData(flowData)$Strain, "MEP2_mCherry_4")
+pData(flowData)$Strain<-relevel(pData(flowData)$Strain, "1658")
+pData(flowData)$Strain<-relevel(pData(flowData)$Strain, "FY4")
+
+
+
+
+
+
+        
+    #    c("FY4","1658","MEP2_mCherry_4","MEP2_GAP1_5A","MEP2_GAP1_5B","HXT6/7_mCherry_7","HXT6/7_GAP1_3A","HXT6/7_GAP1_3D","HXT6/7_GAP1_10A","HXT6/7_GAP1_10B","HXT6/7_GAP1_10C","HXT6/7_GAP1_10D","HXT6/7_GAP1_16B","HXT6/7_GAP1_16C","HXT6/7_GAP1_21A","HXT6/7_GAP1_21B","HXT6/7_GAP1_22C","HXT6/7_GAP1_22D","HXT6/7_mCherryX1658","MEP2_GAP1_16B","MEP2_GAP1_16C","MEP2_GAP1_19A","MEP2_GAP1_19B","MEP2_GAP1_19C","MEP2_GAP1_19D","MEP2_GAP1_9A","MEP2_GAP1_9B","MEP2_GAP1_9C","MEP2_GAP1_9D","MEP2_mCherryX1658"))
+
 
 ```
 
@@ -362,24 +389,89 @@ for(i in 1:length(filteredData)){
 ***Plots***
 
 ```{r}
+fvs <- list()
+fvf1 <- list()
+fvf2 <- list()
+f1vf2 <- list()
+f1 <- list()
+f2 <- list()
+  
 for(i in 1:length(flowData)){
-fvs <- ggplot(flowData[i])+
-  geom_hex(aes(x = `FSC.A`, y =  `SSC.A`), bins = 512) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
-fvf1 <- ggplot(flowData[i])+
-  geom_hex(aes(x = `FSC.A`, y =  `FL1.A`), bins = 512) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
-fvf2 <- ggplot(flowData[i])+
-  geom_hex(aes(x = `FSC.A`, y =  `FL2.A`), bins = 512) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
-f1vf2 <- ggplot(flowData[i])+
-  geom_hex(aes(x = `FL1.A`, y =  `FL2.A`), bins = 512) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
-f1 <- ggplot(flowData[i])+
+fvs[[i]] <- ggplot(flowData[i])+
+  geom_hex(aes(x = `FSC.A`, y =  `SSC.A`), bins = 128) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
+fvf1[[i]] <- ggplot(flowData[i])+
+  geom_hex(aes(x = `FSC.A`, y =  `FL1.A`), bins = 128) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
+fvf2[[i]] <- ggplot(flowData[i])+
+  geom_hex(aes(x = `FSC.A`, y =  `FL2.A`), bins = 128) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
+f1vf2[[i]] <- ggplot(flowData[i])+
+  geom_hex(aes(x = `FL1.A`, y =  `FL2.A`), bins = 128) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none")
+f1[[i]] <- ggplot(flowData[i])+
   geom_density(aes(x = `FL1.A`, y=..count..)) + scale_x_log10() + theme_classic()
-f2 <- ggplot(flowData[i])+
+f2[[i]] <- ggplot(flowData[i])+
   geom_density(aes(x = `FL2.A`, y=..count..)) + scale_x_log10() + theme_classic()
-
-grid.arrange(fvs, f1vf2, fvf1,fvf2, f1, f2, ncol=2, top=as.character(pData(flowData[i])$Genotype))
 }
 
+# for(i in 1:length(flowData)){
+# fvs[[i]] <- ggplot(flowData[i])+
+#   geom_hex(aes(x = `FSC.A`, y =  `SSC.A`), bins = 1) + theme_classic() + theme(legend.position="none")
+# fvf1[[i]] <- ggplot(flowData[i])+
+#   geom_hex(aes(x = `FSC.A`, y =  `FL1.A`), bins = 1) + theme_classic() + theme(legend.position="none")
+# fvf2[[i]] <- ggplot(flowData[i])+
+#   geom_hex(aes(x = `FSC.A`, y =  `FL2.A`), bins = 1)  + theme_classic() + theme(legend.position="none")
+# f1vf2[[i]] <- ggplot(flowData[i])+
+#   geom_hex(aes(x = `FL1.A`, y =  `FL2.A`), bins = 1)  + theme_classic() + theme(legend.position="none")
+# f1[[i]] <- ggplot(flowData[i])+
+#   geom_density(aes(x = `FL1.A`, y=..count..)) + theme_classic()
+# f2[[i]] <- ggplot(flowData[i])+
+#   geom_density(aes(x = `FL2.A`, y=..count..))  + theme_classic()
+# }
 
+
+
+for(i in 1:length(flowData)){
+#grid.arrange(fvs[[i]], f1vf2[[i]], fvf1[[i]],fvf2[[i]], f1[[i]], f2[[i]], ncol=2, top=paste(as.character(pData(flowData[i])$Strain),as.character(pData(flowData[i])$Experiment),sep=" "))
+  jpeg(paste("FSAvSSA_",as.character(pData(flowData[i])$Strain),"_",as.character(pData(flowData[i])$Instrument),".jpg",sep=""))
+    grid.arrange(fvs[[i]],top=paste(as.character(pData(flowData[i])$Strain),as.character(pData(flowData[i])$Instrument),sep=" "))
+  dev.off()
+  jpeg(paste("FSAvFL1_",as.character(pData(flowData[i])$Strain),"_",as.character(pData(flowData[i])$Instrument),".jpg",sep=""))
+    grid.arrange(fvf1[[i]],top=paste(as.character(pData(flowData[i])$Strain),as.character(pData(flowData[i])$Instrument),sep=" "))
+  dev.off()
+  jpeg(paste("FSAvFL2_",as.character(pData(flowData[i])$Strain),"_",as.character(pData(flowData[i])$Instrument),".jpg",sep=""))
+    grid.arrange(fvf2[[i]],top=paste(as.character(pData(flowData[i])$Strain),as.character(pData(flowData[i])$Instrument),sep=" "))
+  dev.off()
+  jpeg(paste("FL1vFL2_",as.character(pData(flowData[i])$Strain),"_",as.character(pData(flowData[i])$Instrument),".jpg",sep=""))
+    grid.arrange(f1vf2[[i]],top=paste(as.character(pData(flowData[i])$Strain),as.character(pData(flowData[i])$Instrument),sep=" "))
+  dev.off()
+  jpeg(paste("FL1_",as.character(pData(flowData[i])$Strain),"_",as.character(pData(flowData[i])$Instrument),".jpg",sep=""))
+    grid.arrange(f1[[i]],top=paste(as.character(pData(flowData[i])$Strain),as.character(pData(flowData[i])$Instrument),sep=" "))
+  dev.off()
+  jpeg(paste("FL2_",as.character(pData(flowData[i])$Strain),"_",as.character(pData(flowData[i])$Instrument),".jpg",sep=""))
+    grid.arrange(f2[[i]],top=paste(as.character(pData(flowData[i])$Strain),as.character(pData(flowData[i])$Instrument),sep=" "))
+  dev.off()
+}
+
+# for(i in 1:(length(flowData)/4)){
+# fvs[[i]] <- ggplot(flowData)+
+#   geom_hex(aes(x = `FSC.A`, y =  `SSC.A`), bins = 512) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none",strip.background = element_blank(), strip.text.x = element_blank()) + facet_wrap_paginate(c("Strain","Experiment"), ncol = 2, nrow = 2, page = i)
+# fvf1[[i]] <-  ggplot(flowData)+
+#   geom_hex(aes(x = `FSC.A`, y =  `FL1.A`), bins = 512) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none") + facet_wrap_paginate(c("Strain","Experiment"), ncol = 2, nrow = 2, page = i)
+# fvf2[[i]] <-  ggplot(flowData)+
+#   geom_hex(aes(x = `FSC.A`, y =  `FL2.A`), bins = 512) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none") + facet_wrap_paginate(c("Strain","Experiment"), ncol = 2, nrow = 2, page = i)
+# f1vf2[[i]] <-  ggplot(flowData)+
+#   geom_hex(aes(x = `FL1.A`, y =  `FL2.A`), bins = 512) + scale_x_log10() + scale_y_log10() + theme_classic() + theme(legend.position="none") + facet_wrap_paginate(c("Strain","Experiment"), ncol = 2, nrow = 2, page = i)
+# f1[[i]] <- ggplot(flowData)+
+#   geom_density(aes(x = `FL1.A`, y=..count..)) + scale_x_log10() + theme_classic() + theme(legend.position="none") + facet_wrap_paginate(c("Strain","Experiment"), ncol = 2, nrow = 2, page = i)
+#  f2[[i]] <- ggplot(flowData)+
+#    geom_density(aes(x = `FL2.A`, y=..count..)) + scale_x_log10() + theme_classic() + theme(legend.position="none") + facet_wrap_paginate(c("Strain","Experiment"), ncol = 2, nrow = 2, page = i)  
+#   }
+# 
+# grid.arrange(fvs[[1]],fvs[[2]],fvs[[3]],ncol=1, top= "FSA.A vs SSC.A")
+# grid.arrange(fvf1[[1]],fvf1[[2]],fvf1[[3]],ncol=1, top= "FSA.A vs FL1.A")
+# grid.arrange(fvf2[[1]],fvf2[[2]],fvf2[[3]],ncol=1, top= "FSA.A vs FL2.A")
+# grid.arrange(f1vf2[[1]],f1vf2[[2]],f1vf2[[3]],ncol=1, top= "FL1.A vs FL2.A")
+# grid.arrange(f1[[1]],f1[[2]],f1[[3]],ncol=1, top= "FL1.A")
+# grid.arrange(f2[[1]],f2[[2]],f2[[3]],ncol=1, top= "FL2.A")
+ 
 ```
 
 
