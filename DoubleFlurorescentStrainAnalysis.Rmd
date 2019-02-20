@@ -509,7 +509,7 @@ for(i in 1:length(flowData)){
 jpeg("mCit_Blank_FL1_Accuri.jpg")
 ggplot()+
   geom_hex(data=filter(filtered.data, SAMPLE=="FY4_E01"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="blue") + 
-  geom_hex(data=filter(filtered.data, SAMPLE=="1658_E04"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="green") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="1658_E04"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="yellow") + 
   scale_y_continuous(trans="log10")+ 
   scale_x_continuous(trans="log10") + 
   theme_classic() + 
@@ -519,7 +519,7 @@ dev.off()
 jpeg("mCit_Blank_FL2_Accuri.jpg")
 ggplot()+
   geom_hex(data=filter(filtered.data, SAMPLE=="FY4_E01"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="blue") + 
-  geom_hex(data=filter(filtered.data, SAMPLE=="1658_E04"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="red") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="1658_E04"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="yellow") + 
   scale_y_continuous(trans="log10")+ 
   scale_x_continuous(trans="log10") + 
   theme_classic() + 
@@ -530,7 +530,7 @@ dev.off()
 jpeg("mCit_Blank_FL1_Aria.jpg")
 ggplot()+
   geom_hex(data=filter(filtered.data, SAMPLE=="FY4_1"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="blue") + 
-  geom_hex(data=filter(filtered.data, SAMPLE=="1658_2"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="green") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="1658_2"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="yellow") + 
   scale_y_continuous(trans="log10")+ 
   scale_x_continuous(trans="log10") + 
   theme_classic() + 
@@ -540,7 +540,7 @@ dev.off()
 jpeg("mCit_Blank_FL2_Aria.jpg")
 ggplot()+
   geom_hex(data=filter(filtered.data, SAMPLE=="FY4_1"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="blue") + 
-  geom_hex(data=filter(filtered.data, SAMPLE=="1658_2"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="red") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="1658_2"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="yellow") + 
   scale_y_continuous(trans="log10")+ 
   scale_x_continuous(trans="log10") + 
   theme_classic() + 
@@ -552,7 +552,7 @@ dev.off()
 jpeg("mCherry_Blank_FL1_Accuri.jpg")
 ggplot()+
   geom_hex(data=filter(filtered.data, SAMPLE=="FY4_E01"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="blue") + 
-  geom_hex(data=filter(filtered.data, SAMPLE=="HXT6n7_mCherry_7_E03"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="green") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="HXT6n7_mCherry_7_E03"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="yellow") + 
   scale_y_continuous(trans="log10")+ 
   scale_x_continuous(trans="log10") + 
   theme_classic() + 
@@ -562,7 +562,7 @@ dev.off()
 jpeg("mCherry_Blank_FL2_Accuri.jpg")
 ggplot()+
   geom_hex(data=filter(filtered.data, SAMPLE=="FY4_E01"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="blue") + 
-  geom_hex(data=filter(filtered.data, SAMPLE=="HXT6n7_mCherry_7_E03"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="red") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="HXT6n7_mCherry_7_E03"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="yellow") + 
   scale_y_continuous(trans="log10")+ 
   scale_x_continuous(trans="log10") + 
   theme_classic() + 
@@ -573,7 +573,7 @@ dev.off()
 jpeg("mCherry_Blank_FL1_Aria.jpg")
 ggplot()+
   geom_hex(data=filter(filtered.data, SAMPLE=="FY4_1"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="blue") + 
-  geom_hex(data=filter(filtered.data, SAMPLE=="HXT6n7_mCherry_7_6"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="green") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="HXT6n7_mCherry_7_6"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="yellow") + 
   scale_y_continuous(trans="log10")+ 
   scale_x_continuous(trans="log10") + 
   theme_classic() + 
@@ -583,7 +583,7 @@ dev.off()
 jpeg("mCherry_Blank_FL2_Aria.jpg")
 ggplot()+
   geom_hex(data=filter(filtered.data, SAMPLE=="FY4_1"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="blue") + 
-  geom_hex(data=filter(filtered.data, SAMPLE=="HXT6n7_mCherry_7_6"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="red") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="HXT6n7_mCherry_7_6"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="yellow") + 
   scale_y_continuous(trans="log10")+ 
   scale_x_continuous(trans="log10") + 
   theme_classic() + 
@@ -595,7 +595,7 @@ dev.off()
 jpeg("Dual_Blank_FL1_Accuri.jpg")
 ggplot()+
   geom_hex(data=filter(filtered.data, SAMPLE=="FY4_E01"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="blue") + 
-  geom_hex(data=filter(filtered.data, SAMPLE=="3D_G02"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="green") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="3D_G02"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="yellow") + 
   scale_y_continuous(trans="log10")+ 
   scale_x_continuous(trans="log10") + 
   theme_classic() + 
@@ -605,7 +605,7 @@ dev.off()
 jpeg("Dual_Blank_FL2_Accuri.jpg")
 ggplot()+
   geom_hex(data=filter(filtered.data, SAMPLE=="FY4_E01"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="blue") + 
-  geom_hex(data=filter(filtered.data, SAMPLE=="3D_G02"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="red") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="3D_G02"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="yellow") + 
   scale_y_continuous(trans="log10")+ 
   scale_x_continuous(trans="log10") + 
   theme_classic() + 
@@ -616,17 +616,17 @@ dev.off()
 jpeg("Dual_Blank_FL1_Aria.jpg")
 ggplot()+
   geom_hex(data=filter(filtered.data, SAMPLE=="FY4_1"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="blue") + 
-  geom_hex(data=filter(filtered.data, SAMPLE=="3D_8"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="green") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="3D_8"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="yellow") + 
   scale_y_continuous(trans="log10")+ 
   scale_x_continuous(trans="log10") + 
   theme_classic() + 
   theme(legend.position="none")
 dev.off()
 
-jpeg("Dual_Blank_FL1_Aria.jpg")
+jpeg("Dual_Blank_FL2_Aria.jpg")
 ggplot()+
   geom_hex(data=filter(filtered.data, SAMPLE=="FY4_1"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="blue") + 
-  geom_hex(data=filter(filtered.data, SAMPLE=="3D_8"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="red") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="3D_8"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="yellow") + 
   scale_y_continuous(trans="log10")+ 
   scale_x_continuous(trans="log10") + 
   theme_classic() + 
