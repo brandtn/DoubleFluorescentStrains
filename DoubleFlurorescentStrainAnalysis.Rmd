@@ -414,6 +414,18 @@ f2[[i]] <- ggplot(filter(filtered.data, SAMPLE==sampleNames(flowData)[i]))+
 }
 
 
+ggplot(filter(filtered.data, SAMPLE==sampleNames(flowData)[1:2]))+
+  geom_hex(aes(x = FSC.A, y =  FL1.A), bins = 128,colour=c("blue","red")) + scale_y_continuous(trans="log10",limits=c(1e0,1e6))+ scale_x_continuous(trans="log10") + theme_classic() + theme(legend.position="none")
+
+ggplot()+
+  geom_hex(data=filter(filtered.data, SAMPLE=="FY4_E01"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="blue") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="1658_E04"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="green") + 
+  scale_y_continuous(trans="log10")+ 
+  scale_x_continuous(trans="log10") + 
+  theme_classic() + 
+  theme(legend.position="none")
+
+
 
 # for(i in 1:length(flowData)){
 # fvs[[i]] <- ggplot(flowData[i])+
@@ -492,8 +504,137 @@ for(i in 1:length(flowData)){
 # grid.arrange(f2[[1]],f2[[2]],f2[[3]],ncol=1, top= "FL2.A")
  
 ```
+```{r}
+#Accuri
+jpeg("mCit_Blank_FL1_Accuri.jpg")
+ggplot()+
+  geom_hex(data=filter(filtered.data, SAMPLE=="FY4_E01"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="blue") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="1658_E04"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="green") + 
+  scale_y_continuous(trans="log10")+ 
+  scale_x_continuous(trans="log10") + 
+  theme_classic() + 
+  theme(legend.position="none")
+dev.off()
+
+jpeg("mCit_Blank_FL2_Accuri.jpg")
+ggplot()+
+  geom_hex(data=filter(filtered.data, SAMPLE=="FY4_E01"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="blue") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="1658_E04"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="red") + 
+  scale_y_continuous(trans="log10")+ 
+  scale_x_continuous(trans="log10") + 
+  theme_classic() + 
+  theme(legend.position="none")
+dev.off()
+
+#Aria
+jpeg("mCit_Blank_FL1_Aria.jpg")
+ggplot()+
+  geom_hex(data=filter(filtered.data, SAMPLE=="FY4_1"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="blue") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="1658_2"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="green") + 
+  scale_y_continuous(trans="log10")+ 
+  scale_x_continuous(trans="log10") + 
+  theme_classic() + 
+  theme(legend.position="none")
+dev.off()
+
+jpeg("mCit_Blank_FL2_Aria.jpg")
+ggplot()+
+  geom_hex(data=filter(filtered.data, SAMPLE=="FY4_1"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="blue") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="1658_2"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="red") + 
+  scale_y_continuous(trans="log10")+ 
+  scale_x_continuous(trans="log10") + 
+  theme_classic() + 
+  theme(legend.position="none")
+dev.off()
 
 
+#Accuri
+jpeg("mCherry_Blank_FL1_Accuri.jpg")
+ggplot()+
+  geom_hex(data=filter(filtered.data, SAMPLE=="FY4_E01"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="blue") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="HXT6n7_mCherry_7_E03"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="green") + 
+  scale_y_continuous(trans="log10")+ 
+  scale_x_continuous(trans="log10") + 
+  theme_classic() + 
+  theme(legend.position="none")
+dev.off()
+
+jpeg("mCherry_Blank_FL2_Accuri.jpg")
+ggplot()+
+  geom_hex(data=filter(filtered.data, SAMPLE=="FY4_E01"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="blue") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="HXT6n7_mCherry_7_E03"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="red") + 
+  scale_y_continuous(trans="log10")+ 
+  scale_x_continuous(trans="log10") + 
+  theme_classic() + 
+  theme(legend.position="none")
+dev.off()
+
+#Aria
+jpeg("mCherry_Blank_FL1_Aria.jpg")
+ggplot()+
+  geom_hex(data=filter(filtered.data, SAMPLE=="FY4_1"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="blue") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="HXT6n7_mCherry_7_6"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="green") + 
+  scale_y_continuous(trans="log10")+ 
+  scale_x_continuous(trans="log10") + 
+  theme_classic() + 
+  theme(legend.position="none")
+dev.off()
+
+jpeg("mCherry_Blank_FL2_Aria.jpg")
+ggplot()+
+  geom_hex(data=filter(filtered.data, SAMPLE=="FY4_1"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="blue") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="HXT6n7_mCherry_7_6"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="red") + 
+  scale_y_continuous(trans="log10")+ 
+  scale_x_continuous(trans="log10") + 
+  theme_classic() + 
+  theme(legend.position="none")
+dev.off()
+
+
+#Accuri
+jpeg("Dual_Blank_FL1_Accuri.jpg")
+ggplot()+
+  geom_hex(data=filter(filtered.data, SAMPLE=="FY4_E01"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="blue") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="3D_G02"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="green") + 
+  scale_y_continuous(trans="log10")+ 
+  scale_x_continuous(trans="log10") + 
+  theme_classic() + 
+  theme(legend.position="none")
+dev.off()
+
+jpeg("Dual_Blank_FL2_Accuri.jpg")
+ggplot()+
+  geom_hex(data=filter(filtered.data, SAMPLE=="FY4_E01"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="blue") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="3D_G02"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="red") + 
+  scale_y_continuous(trans="log10")+ 
+  scale_x_continuous(trans="log10") + 
+  theme_classic() + 
+  theme(legend.position="none")
+dev.off()
+
+#Aria
+jpeg("Dual_Blank_FL1_Aria.jpg")
+ggplot()+
+  geom_hex(data=filter(filtered.data, SAMPLE=="FY4_1"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="blue") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="3D_8"),aes(x = FSC.A, y =  FL1.A), bins = 128,colour="green") + 
+  scale_y_continuous(trans="log10")+ 
+  scale_x_continuous(trans="log10") + 
+  theme_classic() + 
+  theme(legend.position="none")
+dev.off()
+
+jpeg("Dual_Blank_FL1_Aria.jpg")
+ggplot()+
+  geom_hex(data=filter(filtered.data, SAMPLE=="FY4_1"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="blue") + 
+  geom_hex(data=filter(filtered.data, SAMPLE=="3D_8"),aes(x = FSC.A, y =  FL2.A), bins = 128,colour="red") + 
+  scale_y_continuous(trans="log10")+ 
+  scale_x_continuous(trans="log10") + 
+  theme_classic() + 
+  theme(legend.position="none")
+dev.off()
+
+
+```
 
 ** Saving Data **
 ```{r Saves Data}
